@@ -21,14 +21,8 @@ function getCoords(station) {
 }
 
 function formatTime(minutes) {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  const date = new Date(2024, 0, 1, hours, mins);
-  return date.toLocaleString('en-US', { 
-    hour: 'numeric', 
-    minute: '2-digit',
-    hour12: true 
-  });
+  const date = new Date(0, 0, 0, 0, minutes);
+  return date.toLocaleString('en-US', { timeStyle: 'short' });
 }
 
 function minutesSinceMidnight(date) {
@@ -36,19 +30,23 @@ function minutesSinceMidnight(date) {
 }
 
 function filterByMinute(tripsByMinute, minute) {
+  if (minute === -1) {
+    return tripsByMinute.flat();
+  }
+
   let minMinute = (minute - 60 + 1440) % 1440;
   let maxMinute = (minute + 60) % 1440;
 
   if (minMinute > maxMinute) {
     let beforeMidnight = tripsByMinute.slice(minMinute);
-    let afterMidnight = tripsByMinute.slice(0, maxMinute + 1);
+    let afterMidnight = tripsByMinute.slice(0, maxMinute);
     return beforeMidnight.concat(afterMidnight).flat();
   } else {
-    return tripsByMinute.slice(minMinute, maxMinute + 1).flat();
+    return tripsByMinute.slice(minMinute, maxMinute).flat();
   }
 }
 
-function computeStationTraffic(stations, timeFilter) {
+function computeStationTraffic(stations, timeFilter = -1) {
   const departures = d3.rollup(
     filterByMinute(departuresByMinute, timeFilter),
     (v) => v.length,
@@ -134,13 +132,13 @@ map.on('load', async () => {
     return;
   }
 
-  let stations = computeStationTraffic(jsonData.data.stations, 0);
+  let stations = computeStationTraffic(jsonData.data.stations);
   console.log('Stations with traffic:', stations);
 
   const radiusScale = d3
     .scaleSqrt()
     .domain([0, d3.max(stations, (d) => d.totalTraffic)])
-    .range([3, 50]);
+    .range([0, 25]);
 
   const svg = d3.select('#map').select('svg');
 
@@ -177,10 +175,12 @@ map.on('load', async () => {
 
   const timeSlider = document.getElementById('time-slider');
   const selectedTime = document.getElementById('selected-time');
+  const anyTimeLabel = document.getElementById('any-time');
 
   function updateScatterPlot(timeFilter) {
     const filteredStations = computeStationTraffic(stations, timeFilter);
 
+    timeFilter === -1 ? radiusScale.range([0, 25]) : radiusScale.range([3, 50]);
     radiusScale.domain([0, d3.max(filteredStations, (d) => d.totalTraffic)]);
 
     circles
@@ -200,7 +200,15 @@ map.on('load', async () => {
 
   function updateTimeDisplay() {
     let timeFilter = Number(timeSlider.value);
-    selectedTime.textContent = formatTime(timeFilter);
+
+    if (timeFilter === -1) {
+      selectedTime.textContent = '';
+      anyTimeLabel.style.display = 'block';
+    } else {
+      selectedTime.textContent = formatTime(timeFilter);
+      anyTimeLabel.style.display = 'none';
+    }
+
     updateScatterPlot(timeFilter);
   }
 
