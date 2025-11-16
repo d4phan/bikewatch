@@ -13,12 +13,14 @@
   <body>
     <header id="controls">
         <h1>🚴‍♀️ Bikewatching</h1>
-        <label for="time-slider">
-            Filter by time:
+        <div class="filter-wrapper">
             <input type="range" id="time-slider" min="-1" max="1440" value="-1">
-            <time id="selected-time"></time>
-            <em id="any-time">(any time)</em>
-        </label>
+            <div class="time-info">
+                <span class="filter-label">Filter by time:</span>
+                <time id="selected-time"></time>
+                <em id="any-time">(any time)</em>
+            </div>
+        </div>
     </header>
     <div id="map-container">
       <div id="map"></div>

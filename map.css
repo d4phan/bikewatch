@@ -46,16 +46,20 @@ header#controls {
   display: flex;
   gap: 1em;
   align-items: center;
-  padding: 0 1em;
+  padding: 1em 2em;
   width: 100%;
 }
 
-header#controls label {
+header#controls h1 {
+  margin: 0;
+}
+
+.filter-wrapper {
   margin-left: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  font-size: 0.9rem;
+  gap: 0.5em;
 }
 
 #time-slider {
@@ -63,13 +67,25 @@ header#controls label {
   cursor: pointer;
 }
 
-header#controls time,
-header#controls em {
-  display: block;
-  margin-top: 4px;
+.time-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  font-size: 0.9rem;
 }
 
-header#controls em {
+.filter-label {
+  font-weight: normal;
+  color: #333;
+}
+
+#selected-time {
+  font-weight: 600;
+  min-width: 70px;
+  text-align: left;
+}
+
+#any-time {
   color: gray;
   font-style: italic;
 }
@@ -109,3 +125,4 @@ header#controls em {
   font-weight: 600;
   border-radius: 4px;
 }
+
