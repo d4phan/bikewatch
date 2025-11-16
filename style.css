@@ -24,11 +24,15 @@ header h1 {
   white-space: nowrap;
 }
 
-header label {
+.filter-container {
   display: flex;
   align-items: center;
   gap: 0.6em;
   font-size: 0.85em;
+  position: relative;
+}
+
+.filter-container label {
   white-space: nowrap;
   color: #333;
 }
@@ -36,7 +40,7 @@ header label {
 #time-slider {
   width: 200px;
   height: 4px;
-  margin: 0 0.5em;
+  margin: 0;
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -92,40 +96,28 @@ header label {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-#time-slider::-ms-track {
-  width: 100%;
-  height: 4px;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 70px;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.3em;
 }
 
-#time-slider::-ms-fill-lower {
-  background: #4A90E2;
-  border-radius: 2px;
-}
-
-#time-slider::-ms-fill-upper {
-  background: #e0e0e0;
-  border-radius: 2px;
-}
-
-#time-slider::-ms-thumb {
-  width: 16px;
-  height: 16px;
-  background: #4A90E2;
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+#any-time {
+  font-size: 0.85em;
+  color: #999;
+  font-weight: 400;
+  display: block;
 }
 
 #selected-time {
-  display: inline-block;
-  min-width: 70px;
-  text-align: left;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  color: #666;
+  color: #333;
+  display: block;
 }
 

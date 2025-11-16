@@ -195,7 +195,16 @@ map.on('load', async () => {
 
   function updateTimeDisplay() {
     let timeFilter = Number(timeSlider.value);
+    const anyTimeLabel = document.getElementById('any-time');
+  
     selectedTime.textContent = formatTime(timeFilter);
+  
+    if (timeFilter === 0) {
+      anyTimeLabel.style.display = 'block';
+    } else {
+      anyTimeLabel.style.display = 'none';
+    }
+  
     updateScatterPlot(timeFilter);
   }
 
