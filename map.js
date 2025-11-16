@@ -100,7 +100,7 @@ map.on('load', async () => {
     }
   });
 
-  const svg = d3.select('#map').select('svg');
+  const svg = d3.select('#overlay');
 
   try {
     const jsonData = await d3.json('https://dsc106.com/labs/lab07/data/bluebikes-stations.json');
