@@ -30,7 +30,6 @@ header label {
   align-items: baseline;
   gap: 0.5em;
   font-size: 0.9em;
-  white-space: nowrap;
 }
 
 #time-slider {
@@ -93,21 +92,13 @@ header label {
 
 #selected-time,
 #any-time {
-  display: inline-block;
-  width: 85px;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
+  display: block;
+  min-width: 80px;
 }
 
 #any-time {
   font-style: italic;
   color: #999;
-  font-weight: 400;
-}
-
-#selected-time {
-  font-weight: 600;
-  color: #333;
 }
 
 #map {
