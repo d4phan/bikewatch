@@ -1,4 +1,5 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiZDRwaGFuIiwiYSI6ImNtaHphdDI3bjA4MmkyaW16cWNzN2w3ZGsifQ.VDUgpUou_ng6fdLFWEFsLg';
 
 const map = new mapboxgl.Map({
@@ -125,6 +126,10 @@ map.on('load', async () => {
     let stations = computeStationTraffic(baseStations);
     console.log('Stations with traffic:', stations);
 
+    const stationFlow = d3.scaleQuantize()
+      .domain([0, 1])
+      .range([0, 0.5, 1]);
+
     const radiusScale = d3.scaleSqrt()
       .domain([0, d3.max(stations, d => d.totalTraffic)])
       .range([0, 25]);
@@ -135,10 +140,10 @@ map.on('load', async () => {
       .enter()
       .append("circle")
       .attr("r", d => radiusScale(d.totalTraffic))
-      .attr("fill", "steelblue")
-      .attr("stroke", "white")
-      .attr("stroke-width", 1)
-      .attr("opacity", 0.8)
+      .style("--departure-ratio", d => {
+        if (d.totalTraffic === 0) return 0.5;
+        return stationFlow(d.departures / d.totalTraffic);
+      })
       .each(function (d) {
         d3.select(this)
           .append("title")
@@ -174,6 +179,10 @@ map.on('load', async () => {
         .transition()
         .duration(200)
         .attr("r", d => radiusScale(d.totalTraffic))
+        .style("--departure-ratio", d => {
+          if (d.totalTraffic === 0) return 0.5;
+          return stationFlow(d.departures / d.totalTraffic);
+        })
         .selection()
         .select("title")
         .text(`${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
@@ -202,4 +211,3 @@ map.on('load', async () => {
     console.error("Error loading data:", error);
   }
 });
-
