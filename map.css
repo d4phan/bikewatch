@@ -35,7 +35,7 @@ body {
 }
 
 #overlay circle {
-  fill: var(--color, steelblue);
+  fill: var(--color, rgb(143, 190, 229));
   fill-opacity: 60%;
   stroke: white;
   stroke-width: 1px;
