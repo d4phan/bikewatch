@@ -24,10 +24,17 @@ header h1 {
   font-weight: 700;
 }
 
-header label {
+.filter-wrapper {
   margin-left: auto;
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3em;
+}
+
+.filter-wrapper label {
+  display: flex;
+  align-items: center;
   gap: 0.5em;
   font-size: 0.9em;
 }
@@ -90,15 +97,31 @@ header label {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
+.time-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 200px;
+  padding-right: 0;
+}
+
 #selected-time,
 #any-time {
   display: block;
   min-width: 80px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 #any-time {
   font-style: italic;
   color: #999;
+  font-size: 0.85em;
+}
+
+#selected-time {
+  font-weight: 600;
+  color: #333;
 }
 
 #map {
@@ -110,3 +133,4 @@ header label {
   border-radius: 4px;
   overflow: hidden;
 }
+
