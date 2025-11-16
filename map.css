@@ -1,7 +1,7 @@
 html,
 body {
   margin: 0;
-  padding: 5;
+  padding: 0;
   height: 100%;
   width: 100%;
   display: flex;
@@ -11,10 +11,8 @@ body {
 
 #map {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
 }
 
 #map svg {
