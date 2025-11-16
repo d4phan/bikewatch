@@ -12,16 +12,19 @@
   </head>
   <body>
     <header id="controls">
-        <h1>🚴‍♀️ Bikewatching</h1>
-        <div class="filter-wrapper">
-            <input type="range" id="time-slider" min="-1" max="1440" value="-1">
-            <div class="time-info">
-                <span class="filter-label">Filter by time:</span>
+      <h1>🚴‍♀️ Bikewatching</h1>
+      <div class="filter-wrapper">
+        <input type="range" id="time-slider" min="-1" max="1440" value="-1">
+        <div class="time-info">
+            <span class="filter-label">Filter by time:</span>
+            <div class="time-display">
                 <time id="selected-time"></time>
                 <em id="any-time">(any time)</em>
             </div>
         </div>
-    </header>
+    </div>
+</header>
+
     <div id="map-container">
       <div id="map"></div>
       <svg id="overlay"></svg>
