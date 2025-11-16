@@ -147,7 +147,6 @@ map.on('load', async () => {
     stations = computeStationTraffic(baseStations);
     console.log('Stations with traffic:', stations);
 
-    // Setup scales
     stationFlow = d3.scaleQuantize()
       .domain([0, 1])
       .range([0, 0.5, 1]);
