@@ -134,7 +134,8 @@ map.on('load', async () => {
     return;
   }
 
-  let stations = jsonData.data.stations;
+  let stations = computeStationTraffic(jsonData.data.stations, 0);
+  console.log('Stations with traffic:', stations);
 
   const radiusScale = d3
     .scaleSqrt()
@@ -148,13 +149,17 @@ map.on('load', async () => {
     .data(stations, (d) => d.short_name)
     .enter()
     .append('circle')
+    .attr('r', (d) => radiusScale(d.totalTraffic))
     .attr('fill', 'steelblue')
     .attr('stroke', 'white')
     .attr('stroke-width', 1)
     .attr('opacity', 0.8)
     .each(function (d) {
       d3.select(this)
-        .append('title');
+        .append('title')
+        .text(
+          `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`
+        );
     });
 
   function updatePositions() {
@@ -195,7 +200,6 @@ map.on('load', async () => {
 
   function updateTimeDisplay() {
     let timeFilter = Number(timeSlider.value);
-  
     selectedTime.textContent = formatTime(timeFilter);
     updateScatterPlot(timeFilter);
   }
@@ -203,3 +207,4 @@ map.on('load', async () => {
   timeSlider.addEventListener('input', updateTimeDisplay);
   updateTimeDisplay();
 });
+
