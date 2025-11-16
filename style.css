@@ -2,38 +2,43 @@ body {
   font: 100%/1.5 system-ui, sans-serif;
   display: flex;
   flex-flow: column;
-  max-width: 80em;
+  max-width: none;
   min-height: 100vh;
   box-sizing: border-box;
-  margin: auto;
-  padding: 1em;
+  margin: 0;
+  padding: 0;
 }
 
 header {
   display: flex;
-  gap: 1em;
-  align-items: baseline;
-  margin-bottom: 1em;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: normal;
 }
 
 header label {
-  margin-left: auto;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.5em;
+  font-size: 0.9em;
 }
 
 #time-slider {
   width: 200px;
+  margin: 0 0.5em;
 }
 
-#selected-time,
-#any-time {
-  display: block;
-  min-width: 80px;
-}
-
-#any-time {
-  font-style: italic;
-  color: #666;
+#selected-time {
+  display: inline-block;
+  min-width: 70px;
+  text-align: right;
+  font-weight: 600;
 }
