@@ -1,7 +1,5 @@
-import mapboxgl from 'https://cdn.jsdelivr.net/npm/mapbox-gl@2.15.0/+esm';
-console.log('Mapbox GL JS Loaded:', mapboxgl);
+mapboxgl.accessToken = 'YOUR_ACCESS_TOKEN_HERE';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZDRwaGFuIiwiYSI6ImNtaHphdDI3bjA4MmkyaW16cWNzN2w3ZGsifQ.VDUgpUou_ng6fdLFWEFsLg';
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v12',
@@ -22,9 +20,9 @@ map.on('load', async () => {
     type: 'line',
     source: 'boston_route',
     paint: {
-      'line-color': '#32D400',
-      'line-width': 5,
-      'line-opacity': 0.6,
+      'line-color': '#32CD32', 
+      'line-width': 4,
+      'line-opacity': 0.8,
     },
   });
 
@@ -38,9 +36,9 @@ map.on('load', async () => {
     type: 'line',
     source: 'cambridge_route',
     paint: {
-      'line-color': '#0080FF', 
-      'line-width': 5,
-      'line-opacity': 0.6,
+      'line-color': '#FF8C00', 
+      'line-width': 4,
+      'line-opacity': 0.8,
     },
   });
 });
